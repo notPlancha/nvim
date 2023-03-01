@@ -1,5 +1,6 @@
 local lspZero = {
     'VonHeikemen/lsp-zero.nvim',
+    name = 'lsp-zero',
     branch = 'v1.x',
     dependencies = {
       -- LSP Support

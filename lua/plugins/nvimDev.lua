@@ -13,6 +13,7 @@ local neodev = { --vim api lsp
 
 local whichKey = { -- show the command helpers automatically
     "folke/which-key.nvim",
+    name = "which-key",
     tag = "v1.1.1",
     opts = {
         plugins = {
@@ -94,7 +95,8 @@ local mapx = { -- helper to remap
         global = true,
         whichkey = true
     },
-    lazy = false
+    lazy = false,
+    name = "mapx"
 }
 
 return {neodev, whichKey, mapx}
