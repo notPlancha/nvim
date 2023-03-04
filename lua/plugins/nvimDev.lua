@@ -88,15 +88,5 @@ local whichKey = { -- show the command helpers automatically
         },
       }
 }
-local mapx = { -- helper to remap
-    "b0o/mapx.nvim",
-    dependencies = {"folke/which-key.nvim"},
-    opts = {
-        global = true,
-        whichkey = true
-    },
-    lazy = false,
-    name = "mapx"
-}
 
-return {neodev, whichKey, mapx}
+return {neodev, whichKey}
