@@ -25,11 +25,51 @@ local function cmd(words, func, nargs, desc, bangable, oncomplete)
 end
 -- quit with :Q
 cmd("Q",":wqa<CR>",0,"Quit all windows")
--- paste with v and ctrl v
--- map("v",'"+p',"n") --v is used for visual mode
-map("<C-v>",'"+p',"n")
--- also in insert mode
-map("<C-v>",'<Esc>"+pi',"i")
+
+-- copy and paste {
+  -- { paste
+    map("<C-v>",function ()
+      vim.cmd('P "+')
+      print("Pasted from clipboard")
+    end,{"i", "n"})
+
+    map("v",function()
+      vim.cmd('P')
+      print("Pasted from default")
+    end,{"n"})
+  -- } copy {
+    map("<C-c>",function ()
+      vim.cmd('yank "+')
+      print("Copied to clipboard")
+    end,{"v"})
+
+    map("c",function ()
+      vim.cmd('yank')
+      print("Copied to default")
+    end,{"v"})
+
+    map("c", '"+y', {"n"}) --these can be ctrl for register "+ but I think it makes it harder to use
+    map("cc", function ()
+      vim.cmd('yank "+')
+      print("Copied line to clipboard")
+    end, {"n"})
+    
+    map("<C-c>", function ()
+      vim.cmd('yank "+')
+      print("Copied line to clipboard")
+    end, {"n"})
+  -- }
+  map("<C-d>",function () -- clone the line
+    vim.cmd('yy')
+    vim.cmd("put")
+  end,{"n", "i"})
+
+  map("<C-d>",function ()
+    vim.cmd('y')
+    vim.cmd("put")
+  end,{"v"})
+-- }
+--TODO organize this better
 -- go to end of line shift e
 map("<S-e>","$","n")
 -- go to start of the word with q
@@ -38,7 +78,6 @@ map("q","b","n")
 map("<S-q>","^","n")
 -- copy with c and ctrl c
 map("c",'"+y',"v")
-map("<C-c>",'"+y',"v")
 -- copy line with cc
 map("cc",'"+yy',"n")
 -- cut with x
@@ -77,7 +116,7 @@ map("cw","+yiw","n")
 -- space to enter insert mode
 map(" ","i ","n")
 -- enter to enter insert mode on new line
-map("<CR>","o","n")
+map("<CR>","o","n") --todo change to if on the start of the line then new line above
 -- shift arrow down to move line down
 map("<S-Down>",":m .+1<Enter>","n", true)
 map("<S-Down>","<Esc>:m .+1<Enter>i","i", true)
