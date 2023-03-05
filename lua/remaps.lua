@@ -54,10 +54,10 @@ map("<C-y>","<C-r>","n")
 map("<A-Down>","G","n")
 -- alt arrow up to go to start of file
 map("<A-Up>","gg","n")
--- alt arrow left to go to start of line
-map("<A-Left>","^","n") --TODO check if it works
--- alt arrow right to go to end of line
-map("<A-Right>","$","n") --TODO check if it works
+-- ctrl arrow left to go to start of line
+map("<C-Left>","^","n") --TODO check if it works
+-- ctrl arrow right to go to end of line
+map("<C-Right>","$","n") --TODO check if it works
 -- leader < to go back to last position of cursor
 lmap("<", "<C-o>","n")
 lmap(">","<C-i>","n")
@@ -79,11 +79,11 @@ map(" ","i ","n")
 -- enter to enter insert mode on new line
 map("<CR>","o","n")
 -- shift arrow down to move line down
-map("<S-Down>",":m .+1<Enter>","n")
-map("<S-Down>","<Esc>:m .+1<Enter>i","i")
+map("<S-Down>",":m .+1<Enter>","n", true)
+map("<S-Down>","<Esc>:m .+1<Enter>i","i", true)
 -- shift arrow up to move line up
-map("<S-Up>",":m .-2<Enter>","n")
-map("<S-Up>","<Esc>:m .-2<Enter>i","i")
+map("<S-Up>",":m .-2<Enter>","n", true)
+map("<S-Up>","<Esc>:m .-2<Enter>i","i", true)
 -- repeat same command with .
 map(".","@:","n")
 -- delete with delete key
@@ -141,3 +141,23 @@ map("<BS>}", "di}i","n")
 
 -- map alt mouse1 to mouse3 
 map("<MiddleMouse>", "<A-LeftMouse>","n")
+-- TODO make it better
+
+lmap("q", function()
+    vim.cmd("Q")
+end, {"n"})
+
+-- plugin remaps {
+  lmap("<Tab>", function ()
+    vim.cmd("Telescope file_browser")
+  end, {"n"})
+  lmap("f", function ()
+    vim.cmd("Telescope find_files")
+  end, {"n"})
+  map("<C-f>", function ()
+    vim.cmd("Telescope current_buffer_fuzzy_find")
+  end, {"n", "i"})
+  lmap("<C-f>", function ()
+    vim.cmd("Telescope live_grep")
+  end, {"n"})
+-- }
