@@ -13,6 +13,7 @@ tel.load_extension "file_browser"
 -- highlight on yank TODO
 vim.highlight.on_yank()
 
+
 -- use system clipboard
 --vim.o.clipboard = "unnamedplus"
 
@@ -30,3 +31,5 @@ vim.o.shortmess = vim.o.shortmess .. "F"
 
 -- set showmatch
 vim.o.showmatch = true
+
+vim.opt.foldmethod = "indent"

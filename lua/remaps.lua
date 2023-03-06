@@ -1,3 +1,4 @@
+local vim = vim
 ---args: 
 ---@mode: string|table of strings, between: 
 ---    n: normal mode
