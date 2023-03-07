@@ -70,6 +70,7 @@ cmd("Q",":wqa<CR>",0,"Quit all windows")
     vim.cmd("put")
   end,{"v"})
 -- }
+
 --TODO organize this better
 -- go to end of line shift e
 map("<S-e>","$","n")
@@ -182,10 +183,24 @@ map("<BS>}", "di}i","n")
 -- map alt mouse1 to mouse3 
 map("<MiddleMouse>", "<A-LeftMouse>","n")
 -- TODO make it better
-
+-- leave with leader q
 lmap("q", function()
     vim.cmd("Q")
 end, {"n"})
+-- zoom with C-ScrollWheelUp and C-ScrollWheelDown
+if vim.g.neovide then
+  vim.g.neovide_scale_factor = 1.0
+  local change_scale_factor = function(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+  end
+  vim.keymap.set("n", "<C-ScrollWheelUp>", function()
+    change_scale_factor(1.25)
+  end)
+  vim.keymap.set("n", "<C-C-ScrollWheelDown>", function()
+    change_scale_factor(1/1.25)
+  end)
+end
+
 
 -- plugin remaps {
   lmap("<Tab>", function ()

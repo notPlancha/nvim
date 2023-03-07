@@ -33,3 +33,13 @@ vim.o.shortmess = vim.o.shortmess .. "F"
 vim.o.showmatch = true
 
 vim.opt.foldmethod = "indent"
+
+
+if vim.g.neovide then
+	vim.g.neovide_transparency = 0.95
+end
+
+-- ctrl x isn't working TODO
+-- ctrl back isnt deleting a word
+-- Tab is conflicted with the hider
+-- ctrl v conflicted
