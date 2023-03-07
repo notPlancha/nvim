@@ -59,6 +59,15 @@ cmd("Q",":wqa<CR>",0,"Quit all windows")
       vim.cmd('yank "+')
       print("Copied line to clipboard")
     end, {"n"})
+  -- } cut {
+  map("<C-x>", function ()
+    vim.cmd([['<,'>"+d]])
+    print("Cut to clipboard")
+  end, {"v"})
+  map("x", function ()
+    vim.cmd([['<,'>d]])
+    print("Cut to default")
+  end, {"v"})
   -- }
   map("<C-d>",function () -- clone the line
     vim.cmd('yy')
