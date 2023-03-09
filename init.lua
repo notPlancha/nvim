@@ -1,3 +1,6 @@
+local vim = vim
+local api = vim.api
+local opt = vim.opt
 vim.g.mapleader = [[\]]
 
 require "plugman"
@@ -8,6 +11,15 @@ vim.cmd.colorscheme "catppuccin"
 local tel = require "telescope"
 tel.load_extension "file_browser"
 
+-- ufo-fold{
+	vim.o.foldcolumn = '1' -- '0' is not bad
+	vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+	vim.o.foldlevelstart = 99
+	vim.o.foldenable = true
+
+	opt.foldmethod = "indent"
+	-- opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- }
 
 -- options
 -- highlight on yank TODO
@@ -17,11 +29,10 @@ vim.highlight.on_yank()
 -- use system clipboard
 --vim.o.clipboard = "unnamedplus"
 
--- show line numbers
-vim.o.number = true
+vim.o.number = true -- show line numbers
 
--- show relative line numbers
-vim.o.relativenumber = true
+
+vim.o.relativenumber = true -- show relative line numbers
 
 -- show cursor line
 vim.o.cursorline = true
@@ -31,8 +42,6 @@ vim.o.shortmess = vim.o.shortmess .. "F"
 
 -- set showmatch
 vim.o.showmatch = true
-
-vim.opt.foldmethod = "indent"
 
 
 if vim.g.neovide then

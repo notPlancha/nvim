@@ -47,7 +47,7 @@ local cappucino = {
     }
 }
 local prettyFold = {
-	"anuvyklack/pretty-fold.nvim",
+	"https://github.com/anuvyklack/pretty-fold.nvim",
 	opts = {
    sections = {
       left = {
@@ -58,7 +58,7 @@ local prettyFold = {
          function(config) return config.fill_char:rep(3) end
       }
    },
-   fill_char = ' ',
+   fill_char = '•',
 
    remove_fold_markers = true,
 
@@ -90,4 +90,52 @@ local prettyFold = {
    ft_ignore = { 'neorg' },
 } 
 }
-return {cappucino, prettyFold}
+
+local ufo = {
+    "https://github.com/kevinhwang91/nvim-ufo",
+    name = "ufo-fold",
+    dependencies = {"kevinhwang91/promise-async"},
+    opts = {
+        
+    }
+}
+local dashboard = {
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    opts = 
+    {
+        theme = 'hyper',
+        config = {
+            week_header = {
+            enable = true,
+            },
+            shortcut = {
+            { desc = ' Update', group = '@property', action = 'Lazy update', key = 'u' },
+            {
+                icon = ' ',
+                icon_hl = '@variable',
+                desc = 'Files',
+                group = 'Label',
+                action = 'Telescope find_files',
+                key = 'f',
+            },
+            {
+                desc = ' Apps',
+                group = 'DiagnosticHint',
+                action = 'Telescope app',
+                key = 'a',
+            },
+            {
+                desc = ' dotfiles',
+                group = 'Number',
+                action = 'Telescope dotfiles',
+                key = 'd',
+            },
+            },
+        },
+        
+    },
+    dependencies = {'nvim-tree/nvim-web-devicons'}
+}
+
+return {cappucino, prettyFold, dashboard}

@@ -80,6 +80,17 @@ cmd("Q",":wqa<CR>",0,"Quit all windows")
   end,{"v"})
 -- }
 
+-- fold {
+  -- ctrl - to fold
+  map("<C-->", function ()
+    vim.cmd("foldclose")
+  end, {"n"})
+  -- ctrl + to unfold
+  map("<C-+>", function ()
+    vim.cmd("foldopen")
+  end, {"n"})
+-- }
+
 --TODO organize this better
 -- go to end of line shift e
 map("<S-e>","$","n")
@@ -194,7 +205,7 @@ map("<MiddleMouse>", "<A-LeftMouse>","n")
 -- TODO make it better
 -- leave with leader q
 lmap("q", function()
-    vim.cmd("Q")
+    vim.cmd("Dashboard")
 end, {"n"})
 -- zoom with C-ScrollWheelUp and C-ScrollWheelDown
 if vim.g.neovide then
