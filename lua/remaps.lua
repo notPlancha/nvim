@@ -1,13 +1,5 @@
 local vim = vim
----args: 
----@mode: string|table of strings, between: 
----    n: normal mode
----    i: insert mode
----    v: visual mode
----    others not important rn
----@key: string of set of keys
----@func: string of what to write
----@silent: boolean, if true, then no echo, default false
+
 local function map(key, func, mode, silent)
     vim.keymap.set(mode or "n", key, func, {noremap = true, silent = silent or false})
 end
@@ -24,42 +16,50 @@ local function cmd(words, func, nargs, desc, bangable, oncomplete)
         complete = oncomplete
     })
 end
--- quit with :Q
-cmd("Q",":wqa<CR>",0,"Quit all windows")
 
--- copy and paste {
+local function unmap(key, mode)
+  vim.keymap.del(mode or "n", key)
+end
+
+-- quit with :Q
+-- cmd("Q",":wqa<CR>",0,"Quit all windows")
+cmd("Q", ":q", 0, "same as :q")
+
+-- substitute i with a, to insert after cursor
+map("i", "a", "n")-- TODO test
+
+-- copy and paste { 
   -- { paste
-    map("<C-v>",function ()
-      vim.cmd('P "+')
-      print("Pasted from clipboard")
-    end,{"i", "n"})
+   map("<C-v>",function ()
+		
+     vim.cmd('normal! "+gp')
+     print("Pasted from clipboard")
+     end,{"i", "n"})
 
     map("v",function()
-      vim.cmd('P')
+      vim.cmd('normal! gp')
       print("Pasted from default")
     end,{"n"})
-  -- } copy {
+  -- } 
+  -- copy {
     map("<C-c>",function ()
-      vim.cmd('yank "+')
+      vim.cmd([['<,'>yank +]])
       print("Copied to clipboard")
     end,{"v"})
 
     map("c",function ()
-      vim.cmd('yank')
+      vim.cmd([['<,'>yank]])
       print("Copied to default")
     end,{"v"})
 
     map("c", '"+y', {"n"}) --these can be ctrl for register "+ but I think it makes it harder to use
     map("cc", function ()
-      vim.cmd('yank "+')
+      vim.cmd('yank +')
       print("Copied line to clipboard")
     end, {"n"})
     
-    map("<C-c>", function ()
-      vim.cmd('yank "+')
-      print("Copied line to clipboard")
-    end, {"n"})
-  -- } cut {
+    -- } 
+  -- cut {
   map("<C-x>", function ()
     vim.cmd([['<,'>"+d]])
     print("Cut to clipboard")
@@ -81,31 +81,35 @@ cmd("Q",":wqa<CR>",0,"Quit all windows")
 -- }
 
 -- fold {
-  -- ctrl - to fold
-  map("<C-->", function ()
+  lmap("<kMinus>", function ()
     vim.cmd("foldclose")
   end, {"n"})
-  -- ctrl + to unfold
-  map("<C-+>", function ()
+  lmap("<kPlus>", function () -- these 2 doesn't work and I can't figure out why
     vim.cmd("foldopen")
   end, {"n"})
--- }
+  map("-", function ()
+	  vim.cmd("foldclose")
+  end, {"n"})
+  map("+", function ()
+	  vim.cmd("foldopen")
+  end, {"n"})
+--  }
 
---TODO organize this better
--- go to end of line shift e
+-- movement {
+-- }
 map("<S-e>","$","n")
 -- go to start of the word with q
 map("q","b","n")
 -- go to start of the line with shift q
 map("<S-q>","^","n")
 -- copy with c and ctrl c
-map("c",'"+y',"v")
+--map("c",'"+y',"v")
 -- copy line with cc
-map("cc",'"+yy',"n")
+--map("cc",'"+yy',"n")
 -- cut with x
-map("x",'"+d',"v")
+--map("x",'"+d',"v")
 -- cut line with xx
-map("xx",'"+dd',"n")
+--map("xx",'"+dd',"n")
 -- undo with ctrl z
 map("<C-z>","u","n")
 map("<C-z>","<Esc>u","i")
@@ -132,9 +136,9 @@ lmap(" ","zz","n")
 -- cut the rest of the line on x arrow
 map("<x-Right>","d$","n")
 -- copy the rest of the line on c arrow
-map("<c-Right>","+y$","n")
+--map("<c-Right>","+y$","n")
 -- copy the word with c w
-map("cw","+yiw","n")
+--map("cw","+yiw","n")
 -- space to enter insert mode
 map(" ","i ","n")
 -- enter to enter insert mode on new line
@@ -202,7 +206,6 @@ map("<BS>}", "di}i","n")
 
 -- map alt mouse1 to mouse3 
 map("<MiddleMouse>", "<A-LeftMouse>","n")
--- TODO make it better
 -- leave with leader q
 lmap("q", function()
     vim.cmd("Dashboard")

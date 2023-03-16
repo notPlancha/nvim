@@ -58,7 +58,7 @@ local prettyFold = {
          function(config) return config.fill_char:rep(3) end
       }
    },
-   fill_char = '•',
+   fill_char = 'ˑ',
 
    remove_fold_markers = true,
 
@@ -89,15 +89,6 @@ local prettyFold = {
 
    ft_ignore = { 'neorg' },
 } 
-}
-
-local ufo = {
-    "https://github.com/kevinhwang91/nvim-ufo",
-    name = "ufo-fold",
-    dependencies = {"kevinhwang91/promise-async"},
-    opts = {
-        
-    }
 }
 local dashboard = {
     'glepnir/dashboard-nvim',
@@ -137,5 +128,8 @@ local dashboard = {
     },
     dependencies = {'nvim-tree/nvim-web-devicons'}
 }
+local matchparen = {
+	'monkoose/matchparen.nvim'
 
-return {cappucino, prettyFold, dashboard}
+}
+return {cappucino, prettyFold, dashboard, matchparen}
