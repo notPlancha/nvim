@@ -1,34 +1,51 @@
-# AstroNvim Template
+# notPlancha's Neovim Configuration
 
-**NOTE:** This is for AstroNvim v6+
+Personal Neovim configuration based on [AstroNvim](https://github.com/AstroNvim/AstroNvim) (v4+/v6+).
 
-A template for getting started with [AstroNvim](https://github.com/AstroNvim/AstroNvim)
+## 🚀 Overview
 
-## 🛠️ Installation
+- **Base Framework**: [AstroNvim](https://github.com/AstroNvim/AstroNvim) ([Template](https://github.com/AstroNvim/template))
+- **Plugin Manager**: [lazy.nvim](https://github.com/folke/lazy.nvim)
+- **Package Manager**: [mason.nvim](https://github.com/williamboman/mason.nvim)
 
-#### Make a backup of your current nvim and shared folder
+> [!NOTE]
+> The previous custom configurations are preserved on the [`legacy`](https://github.com/notPlancha/nvim/tree/legacy) branch.
 
-```shell
-mv ~/.config/nvim ~/.config/nvim.bak
-mv ~/.local/share/nvim ~/.local/share/nvim.bak
-mv ~/.local/state/nvim ~/.local/state/nvim.bak
-mv ~/.cache/nvim ~/.cache/nvim.bak
-```
+## 📦 Installation
 
-#### Create a new user repository from this template
+To clone and use this configuration:
 
-Press the "Use this template" button above to create a new repository to store your user configuration.
+### Windows (PowerShell)
+```powershell
+# Clone to Neovim config directory
+git clone https://github.com/notPlancha/nvim.git "$env:LOCALAPPDATA\nvim"
 
-You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
-
-#### Clone the repository
-
-```shell
-git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim
-```
-
-#### Start Neovim
-
-```shell
+# Launch Neovim
 nvim
 ```
+
+### Linux / macOS
+```bash
+# Clone to Neovim config directory
+git clone https://github.com/notPlancha/nvim.git ~/.config/nvim
+
+# Launch Neovim
+nvim
+```
+
+## 🛠️ Structure
+
+- `lua/lazy_setup.lua`: Core plugin manager initialization.
+- `lua/community.lua`: AstroCommunity plugin packs importer.
+- `lua/polish.lua`: Final user customizations (autocmds, mappings, etc.).
+- `lua/plugins/`: Custom plugin specs and overrides:
+  - `astrocore.lua`: Core options, diagnostics, and keymaps.
+  - `astrolsp.lua`: Language server configurations and on-attach handlers.
+  - `astroui.lua`: UI colorscheme and visual preferences.
+  - `mason.lua`: Tool and server installation lists.
+  - `treesitter.lua`: Syntax highlighting parsers.
+  - `user.lua`: Additional personal plugins.
+
+## 🙏 Credits
+
+- [AstroNvim](https://github.com/AstroNvim/AstroNvim) & [AstroNvim/template](https://github.com/AstroNvim/template)
